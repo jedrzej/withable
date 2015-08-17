@@ -2,6 +2,9 @@
 
 This package adds possibility to dynamically eager load Eloquent models relations in Laravel 4/5 using request parameters.
 
+- [Searchable](https://github.com/jedrzej/searchable) - Allows filtering your models using request parameters
+- [Sortable](https://github.com/jedrzej/sortable) - Allows sorting your models using request parameters
+
 ## Composer install
 
 Add the following line to `composer.json` file in your project:

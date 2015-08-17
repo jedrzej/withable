@@ -17,6 +17,10 @@
     "codeception/codeception": "2.0.*",
     "codeception/specify": "*"
   },
+  "suggest": {
+    "jedrzej/searchable": "Allows filtering your models using request parameters",
+    "jedrzej/sortable": "Allows sorting your models using request parameters",
+  },
   "autoload": {
     "psr-4": {
       "Jedrzej\\": "src/Jedrzej/",
