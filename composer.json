@@ -1,7 +1,14 @@
 {
   "name": "jedrzej/withable",
   "description": "Withable trait for Laravel's Eloquent models",
-  "keywords": ["laravel", "eager", "load", "eloquent", "api", "request"],
+  "keywords": [
+    "laravel",
+    "eager",
+    "load",
+    "eloquent",
+    "api",
+    "request"
+  ],
   "homepage": "https://github.com/jedrzej/withable",
   "license": "MIT",
   "authors": [
@@ -16,6 +23,10 @@
   "require-dev": {
     "codeception/codeception": "2.0.*",
     "codeception/specify": "*"
+  },
+  "suggest": {
+    "jedrzej/searchable": "Allows filtering your models using request parameters",
+    "jedrzej/sortable": "Allows sorting your models using request parameters"
   },
   "autoload": {
     "psr-4": {
