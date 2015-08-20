@@ -9,11 +9,11 @@ This package adds possibility to dynamically eager load Eloquent models relation
 
 Add the following line to `composer.json` file in your project:
 
-    "jedrzej/withable": "0.0.1"
+    "jedrzej/withable": "0.0.2"
 	
 or run the following in the commandline in your project's root folder:	
 
-    composer require "jedrzej/withable" "0.0.1"
+    composer require "jedrzej/withable" "0.0.2"
 
 ## Setting up withable models
 
@@ -28,10 +28,10 @@ list loadable relations.
         use WithableTrait;
 
         // either a property holding a list of loadable relations...
-        public $withable = ['owner', 'forum'];
+        protected $withable = ['owner', 'forum'];
 
         // ...or a method that returns a list of loadable relations
-        public function getWithableRelations()
+        protected function getWithableRelations()
         {
             return ['owner', 'forum'];
         }
@@ -39,7 +39,7 @@ list loadable relations.
 
 In order to make all relations loadable put an asterisk `*` in the list:
 
-    public $withable = ['*'];
+    protected $withable = ['*'];
 
 ## Loading relations
 
@@ -61,8 +61,13 @@ In order to make all relations loadable put an asterisk `*` in the list:
 
 ## Additional configuration
 
-If you are using `with` request parameter for other purpose or you need to execute additional logic to define a list of
-relations to load (e.g. permission checking), you can implement `getWithRelationsList()` method in your model and make that return list of relations:
+If you are using `with` request parameter for other purpose, you can change the name of the parameter that will be
+ interpreted as a list of relations to load by setting a `$withParameterName` property in your model, e.g.:
+
+    protected $withParameterName = 'relations';
+
+If you need to execute additional logic to define a list of relations to load (e.g. permission checking),
+you can implement `getWithRelationsList()` method in your model and make that return list of relations:
 
     public function getWithRelationsList() {
       return Input::get('relations');

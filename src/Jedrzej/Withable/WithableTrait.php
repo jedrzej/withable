@@ -6,6 +6,8 @@ use RuntimeException;
 
 trait WithableTrait
 {
+    protected $withParameterName = 'with';
+
     /**
      * Add eager loaded relations.
      *
@@ -30,9 +32,9 @@ trait WithableTrait
         return in_array($relation, $withable) || in_array('*', $withable);
     }
 
-    public function getWithRelationsList($relations = null)
+    protected function getWithRelationsList($relations = null)
     {
-        return $relations ? (array)$relations : (array)Input::get('with', []);
+        return $relations ? (array)$relations : (array)Input::get($this->withParameterName, []);
     }
 
     /**
