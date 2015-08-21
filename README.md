@@ -2,18 +2,21 @@
 
 This package adds possibility to dynamically eager load Eloquent models relations in Laravel 4/5 using request parameters.
 
+You could also find those packages useful:
+
 - [Searchable](https://github.com/jedrzej/searchable) - Allows filtering your models using request parameters
 - [Sortable](https://github.com/jedrzej/sortable) - Allows sorting your models using request parameters
+- [Pimpable](https://github.com/jedrzej/pimpable) - A meta package that combines Sortable, Searchable and Withable behaviours
 
 ## Composer install
 
 Add the following line to `composer.json` file in your project:
 
-    "jedrzej/withable": "0.0.2"
+    "jedrzej/withable": "0.0.3"
 	
 or run the following in the commandline in your project's root folder:	
 
-    composer require "jedrzej/withable" "0.0.2"
+    composer require "jedrzej/withable" "0.0.3"
 
 ## Setting up withable models
 
