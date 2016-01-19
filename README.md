@@ -12,11 +12,11 @@ You could also find those packages useful:
 
 Add the following line to `composer.json` file in your project:
 
-    "jedrzej/withable": "0.0.3"
+    "jedrzej/withable": "0.0.4"
 	
 or run the following in the commandline in your project's root folder:	
 
-    composer require "jedrzej/withable" "0.0.3"
+    composer require "jedrzej/withable" "0.0.4"
 
 ## Setting up withable models
 
