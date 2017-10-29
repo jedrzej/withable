@@ -15,7 +15,20 @@ class WithableTraitTest extends Test
             $this->assertNotContains('relation2', array_keys(TestModelWithWithableMethod::withRelations('relation1')->getEagerLoads()));
         });
 
-        $this->specify("eager loading are applied when array is given", function () {
+        $this->specify("local scope is applied to a relation", function () {
+            $this->assertCount(1, $eagerLoads = TestModelWithWithableMethod::withRelations('relation1:active')->getEagerLoads());
+            $query = (new TestModelWithWithableMethod)->newQueryWithoutScopes();
+            $eagerLoads['relation1']($query);
+
+            $where = $query->getQuery()->wheres[0];
+            $this->assertEquals('Basic', $where['type']);
+            $this->assertEquals(true, $where['value']);
+            $this->assertEquals('=', $where['operator']);
+            $this->assertEquals('is_active', $where['column']);
+
+        });
+
+        $this->specify("eager loading is applied when array is given", function () {
             $this->assertCount(2, TestModelWithWithableMethod::withRelations(['relation1', 'relation2'])->getEagerLoads());
             $this->assertContains('relation1', array_keys(TestModelWithWithableMethod::withRelations(['relation1', 'relation2'])->getEagerLoads()));
             $this->assertContains('relation2', array_keys(TestModelWithWithableMethod::withRelations(['relation1', 'relation2'])->getEagerLoads()));

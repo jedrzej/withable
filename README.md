@@ -12,11 +12,11 @@ You could also find those packages useful:
 
 Add the following line to `composer.json` file in your project:
 
-    "jedrzej/withable": "0.0.4"
+    "jedrzej/withable": "0.0.5"
 	
 or run the following in the commandline in your project's root folder:	
 
-    composer require "jedrzej/withable" "0.0.4"
+    composer require "jedrzej/withable" "0.0.5"
 
 ## Setting up withable models
 
@@ -70,6 +70,24 @@ Post::withRelations('owner')->get();
 Post::withRelations()->get();
 ```
 
+## Loading scoped relations
+If you have defined local scopes in a related model, you can load this relation with the scope applied. E.g. in order to eagerly
+load posts with their approved comments:
+
+```php
+// define local scope in Comment model
+public function scopeApproved($query) {
+  $query->whereIsApproved(true);
+}
+
+// append the following to the URL in order to load "comments" relation with "approved" local scope applied
+?with=comments:approved
+
+// load the posts in your controller
+Post::withRelations()->get();
+```
+
+
 ## Additional configuration
 
 If you are using `with` request parameter for other purpose, you can change the name of the parameter that will be
@@ -84,6 +102,6 @@ you can implement `getWithRelationsList()` method in your model and make that re
 
 ```php
 public function getWithRelationsList() {
-	return Input::get('relations');
+  return Input::get('relations');
 }
 ```
