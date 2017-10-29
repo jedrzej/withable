@@ -18,8 +18,16 @@ trait WithableTrait
     {
         $with = [];
         foreach ($this->getWithRelationsList($relations) as $relation) {
+            list($relation, $scope) = $this->_parseRelation($relation);
+
             if ($this->isWithableRelation($builder, $relation)) {
-                $with[] = $relation;
+                if ($scope) {
+                    $with[$relation] = function ($query) use ($scope) {
+                        $query->$scope();
+                    };
+                } else {
+                    $with[] = $relation;
+                }
             }
         }
         $builder->with($with);
@@ -51,5 +59,22 @@ trait WithableTrait
         }
 
         throw new RuntimeException(sprintf('Model %s must either implement getWithableRelations() or have $withable property set', get_class($builder->getModel())));
+    }
+
+    /**
+     * Parse relation string to extract relation name and optional scope
+     *
+     * @param $relation
+     *
+     * @return array [relation name, scope name]
+     */
+    protected function _parseRelation($relation)
+    {
+        $scope = null;
+        if (strpos($relation, ':') !== false) {
+            list($relation, $scope) = explode(':', $relation);
+        }
+
+        return [$relation, $scope];
     }
 }

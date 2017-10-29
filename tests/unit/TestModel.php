@@ -11,4 +11,8 @@ class TestModel extends Model
     {
         return new TestBuilder;
     }
+
+    public function scopeActive($query) {
+        $query->whereIsActive(true);
+    }
 }
