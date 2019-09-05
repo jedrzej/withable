@@ -1,7 +1,7 @@
 <?php namespace Jedrzej\Withable;
 
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Request;
 use RuntimeException;
 
 trait WithableTrait
@@ -42,7 +42,7 @@ trait WithableTrait
 
     protected function getWithRelationsList($relations = null)
     {
-        return $relations ? (array)$relations : (array)Input::get($this->withParameterName, []);
+        return $relations ? (array)$relations : (array)Request::get($this->withParameterName, []);
     }
 
     /**

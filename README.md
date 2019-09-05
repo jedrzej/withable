@@ -1,6 +1,6 @@
 # Withable trait for Laravel's Eloquent models
 
-This package adds possibility to dynamically eager load Eloquent models relations in Laravel 4/5 using request parameters.
+This package adds possibility to dynamically eager load Eloquent models relations in Laravel 4/5/6 using request parameters.
 
 You could also find those packages useful:
 
@@ -12,11 +12,11 @@ You could also find those packages useful:
 
 Add the following line to `composer.json` file in your project:
 
-    "jedrzej/withable": "0.0.5"
+    "jedrzej/withable": "0.0.6"
 	
 or run the following in the commandline in your project's root folder:	
 
-    composer require "jedrzej/withable" "0.0.5"
+    composer require "jedrzej/withable" "0.0.6"
 
 ## Setting up withable models
 
@@ -59,7 +59,7 @@ Post::withRelations(['owner', 'forum'])->get();
 Post::withRelations('owner')->get();
 ```
 
- or it will use `Input::all()` as default. In the URL you can pass a list of relations to load or a single relation in the `with` parameter:
+ or it will use `Request::all()` as default. In the URL you can pass a list of relations to load or a single relation in the `with` parameter:
 
 ```php    
 // return all posts with the user who created them and forum where they were posted by appending to the URL
@@ -102,6 +102,6 @@ you can implement `getWithRelationsList()` method in your model and make that re
 
 ```php
 public function getWithRelationsList() {
-  return Input::get('relations');
+  return Request::get('relations');
 }
 ```

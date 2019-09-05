@@ -1,11 +1,12 @@
 <?php
 
 use Codeception\Specify;
+use Codeception\AssertThrows;
 use Codeception\TestCase\Test;
 
 class WithableTraitTest extends Test
 {
-    use Specify;
+    use Specify, AssertThrows;
 
     public function testCriteria()
     {
@@ -49,8 +50,10 @@ class WithableTraitTest extends Test
         });
 
         $this->specify('model must implement getWithableAttributes() or have $withable property', function() {
-            TestModel::withRelations('relation1');
-        }, ['throws' => new RuntimeException]);
+            $this->assertThrows(RuntimeException::class, function() {
+                TestModel::withRelations('relation1');
+            });
+        });
 
         $this->specify('* in withable relations list makes all relations loadable', function() {
             $this->assertCount(1, TestModelWithAllRelationsWithable::withRelations('relation1')->getEagerLoads());
