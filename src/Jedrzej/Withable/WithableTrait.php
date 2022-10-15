@@ -71,8 +71,8 @@ trait WithableTrait
     protected function _parseRelation($relation)
     {
         $scope = null;
-        if (strpos($relation, ':') !== false) {
-            list($relation, $scope) = explode(':', $relation);
+        if (strpos($relation, '#') !== false) {
+            list($relation, $scope) = explode('#', $relation);
         }
 
         return [$relation, $scope];
